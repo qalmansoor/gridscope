@@ -1,0 +1,6 @@
+anthropic==0.105.2
+streamlit
+feedparser
+newsapi-python
+pandas
+requests
