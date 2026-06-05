@@ -1,0 +1,10 @@
+# Environment and secrets
+.env
+secrets.toml
+__pycache__/
+*.pyc
+.streamlit/secrets.toml
+
+# System files
+.DS_Store
+Thumbs.db
