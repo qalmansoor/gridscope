@@ -262,7 +262,9 @@ if generate_btn:
 # Display briefing
 if st.session_state.briefing:
     st.markdown("<div class='section-header'>This Week's Briefing</div>", unsafe_allow_html=True)
-    st.markdown(st.session_state.briefing)
+    # Ensure --- is always a thematic break, never a setext h2 heading
+    briefing_text = st.session_state.briefing.replace('\n---', '\n\n---')
+    st.markdown(briefing_text)
 
     st.markdown("---")
 
