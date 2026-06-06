@@ -20,7 +20,7 @@ def fetch_news_api_articles(max_articles=15):
     import streamlit as st
     api_key = os.environ.get("NEWS_API_KEY") or st.secrets.get("NEWS_API_KEY")
     if not api_key:
-        print("✗ NewsAPI: No API key found in environment variables")
+        print("[FAIL] NewsAPI: No API key found in environment variables")
         return []
 
     newsapi = NewsApiClient(api_key=api_key)
@@ -57,7 +57,7 @@ def fetch_news_api_articles(max_articles=15):
                 seen_titles.add(title)
 
                 formatted = {
-                    "source": f"NewsAPI — {article.get('source', {}).get('name', 'Unknown')}",
+                    "source": f"NewsAPI - {article.get('source', {}).get('name', 'Unknown')}",
                     "title": title,
                     "summary": article.get("description") or article.get("content") or "No summary available",
                     "link": article.get("url", ""),
@@ -67,10 +67,10 @@ def fetch_news_api_articles(max_articles=15):
                 all_articles.append(formatted)
                 added += 1
 
-            print(f"✓ NewsAPI '{query[:45]}': {added} articles from trusted sources")
+            print(f"[OK] NewsAPI '{query[:45]}': {added} articles from trusted sources")
 
         except Exception as e:
-            print(f"✗ NewsAPI query failed — {e}")
+            print(f"[FAIL] NewsAPI query failed - {e}")
 
     result = all_articles[:max_articles]
     print(f"\nNewsAPI total articles: {len(result)}")

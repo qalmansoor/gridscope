@@ -9,17 +9,15 @@ FEEDS = {
     "BBC Business": "http://feeds.bbci.co.uk/news/business/rss.xml",
 
     # Middle East focused
-    "Arab News Business": "https://www.arabnews.com/cat/3/rss.xml",
-    "Arab News Energy": "https://www.arabnews.com/tags/energy/rss.xml",
-    "Gulf Times Business": "https://www.gulf-times.com/rss/feed/3",
-    "Al Monitor Energy": "https://www.al-monitor.com/rss",
-    "MENA FN Energy": "https://menafn.com/rss/menafn_energy.xml",
-    "zawya Business": "https://www.zawya.com/rss/economy",
+    "Al Monitor": "https://www.al-monitor.com/rss",
+    "Offshore Energy": "https://www.offshore-energy.biz/feed/",
+    "Energy Central": "https://energycentral.com/rss.cfm",
 
-    # Renewables and transition
-    "Renewables Now": "https://renewablesnow.com/feed/",
+    # Renewables and technology
     "PV Tech": "https://www.pv-tech.org/feed",
-    "Recharge News": "https://www.rechargenews.com/rss",
+    "Energy Storage News": "https://www.energystoragenews.com/feed/",
+    "Hydrogen Insight": "https://www.hydrogeninsight.com/rss",
+    "S&P Commodity Natural Gas": "https://www.spglobal.com/commodityinsights/en/rss-feed/natural-gas",
 }
 
 def fetch_articles(max_per_feed=3):
@@ -41,12 +39,12 @@ def fetch_articles(max_per_feed=3):
                 all_articles.append(article)
 
             if len(entries) > 0:
-                print(f"✓ {source}: fetched {len(entries)} articles")
+                print(f"[OK] {source}: fetched {len(entries)} articles")
             else:
-                print(f"✗ {source}: connected but returned 0 articles")
+                print(f"[FAIL] {source}: connected but returned 0 articles")
 
         except Exception as e:
-            print(f"✗ {source}: failed — {e}")
+            print(f"[FAIL] {source}: failed - {e}")
 
     return all_articles
 
@@ -54,6 +52,3 @@ def fetch_articles(max_per_feed=3):
 if __name__ == "__main__":
     articles = fetch_articles()
     print(f"\nTotal articles fetched: {len(articles)}")
-    for a in articles:
-        print(f"\n[{a['source']}] {a['title']}")
-        print(f"  {a['summary'][:150]}...")

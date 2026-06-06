@@ -1,3 +1,4 @@
+import streamlit as st
 import anthropic
 import os
 from datetime import datetime
@@ -68,7 +69,7 @@ Here are this week's articles:
 
 Write the briefing now. Maximum 300 words. Keep blank lines between every section label and its content."""
 
-    client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+    client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY") or st.secrets.get("ANTHROPIC_API_KEY"))
 
     message = client.messages.create(
         model="claude-opus-4-6",
